@@ -12,7 +12,7 @@ import * as d3 from 'd3';
 export class BarChartComponent implements OnInit, OnChanges {
   @Input() private fires: Fire[];
   private svg: d3.Selection<SVGElement, any, any, any>;
-  private chart: d3.Selection<any, any, any, any>;
+  private chart: any;
   private bars: d3.Selection<any, Fire, any, any>;
   private width: number;
   private height: number;
@@ -74,7 +74,7 @@ export class BarChartComponent implements OnInit, OnChanges {
 
     this.bars = this.chart
       .selectAll('.bar')
-      .data(this.fires, fire => fire.id);
+      .data(this.fires, fire => fire.id); // https://bost.ocks.org/mike/constancy/
 
     // Enter - Add bars to chart
     this.bars

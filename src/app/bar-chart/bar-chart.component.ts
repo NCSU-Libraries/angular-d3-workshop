@@ -63,8 +63,10 @@ export class BarChartComponent implements OnInit, OnChanges {
     const xDomain = [0, d3.max(this.fires.map(fire => fire.Acres))];
     const yDomain = this.fires.map(fire => fire.Name);
 
-    this.xScale = d3.scaleLinear().domain(xDomain).range([0, this.width]);
-    this.yScale = d3.scaleBand().domain(yDomain).range([0, this.height])
+    this.xScale = d3.scaleLinear()
+      .domain(xDomain).range([0, this.width]);
+    this.yScale = d3.scaleBand()
+      .domain(yDomain).range([0, this.height])
       .padding(0.1);
   }
 

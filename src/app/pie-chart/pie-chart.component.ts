@@ -15,8 +15,7 @@ export class PieChartComponent implements OnInit, OnChanges {
   private svg: d3.Selection<SVGElement, any, any, any>;
   private chart: d3.Selection<any, any, any, any>;
   private piePieces: d3.Selection<any, any, any, any>;
-  private width: number;
-  private height: number;
+  private radius: number;
   private margin: { top: number, right: number, bottom: number, left: number };
   constructor() { }
 
@@ -42,12 +41,11 @@ export class PieChartComponent implements OnInit, OnChanges {
       bottom: canvasHeight * 0.05,
       left: canvasWidth * 0.05,
     };
-    this.width = canvasWidth - this.margin.left - this.margin.right;
-    this.height = canvasHeight - this.margin.top - this.margin.bottom;
+    this.radius = Math.min(canvasWidth, canvasHeight) * 0.95 / 2;
 
     this.chart
       .attr('fill', '#333')
-      .attr('transform', `translate( ${this.margin.left}, ${this.margin.top})`);
+      .attr('transform', `translate( ${canvasWidth / 2}, ${canvasHeight / 2})`);
   }
 
 }

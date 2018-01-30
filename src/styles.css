@@ -1,1 +1,32 @@
 /* You can add global styles to this file, and also import other style files */
+
+body {
+  margin: 0;
+}
+
+.full-view-width {
+  width: 100vw
+}
+
+.half-view-width {
+  width: 50vw;
+}
+
+.half-view-height {
+  height: 50vh;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.vertical-scroll {
+  overflow-y: scroll;
+}
+
+.table-graph-container {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,18 @@
+<div class="table-graph-container">
+  <!-- *ngIf ensures data has loaded before initializing charts -->
+  <app-bar-chart *ngIf="fires" [fires]="fires"></app-bar-chart>
+  <app-pie-chart *ngIf="fires" [fires]="fires"></app-pie-chart>
+  <div class="full-view-width half-view-height vertical-scroll">
+    <table class="full-width">
+      <tbody>
+        <tr *ngFor="let fire of fires">
+          <td>{{fire.Name}}</td>
+          <td>{{fire.County}}</td>
+          <td>{{fire.Acres}}</td>
+          <td>{{fire.Cause}}</td>
+           <button (click)="delete(fire)" type="button" class="btn btn-link">Remove</button>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

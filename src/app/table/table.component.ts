@@ -10,6 +10,7 @@ import { Fire } from '../data.interface';
 })
 export class TableComponent implements OnInit {
   private fires: Fire[];
+  private deleteFire: Fire;
   constructor(private fireDataService: FireDataService) { }
 
   ngOnInit() {
@@ -23,6 +24,7 @@ export class TableComponent implements OnInit {
 
   delete(fire: Fire): void {
     this.fires = this.fires.filter(keepFire => keepFire !== fire);
+    this.deleteFire = fire;
     this.fireDataService.deleteFire(fire).subscribe();
   }
 

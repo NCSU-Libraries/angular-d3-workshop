@@ -91,7 +91,7 @@ export class BarChartComponent implements OnInit, OnChanges {
 
     // Update - Modify current bars on chart
     this.bars
-      .transition().delay(500)
+      .transition().delay(250)
       .attr('y', fire => this.yScale(fire.Name))
       .attr('width', fire => this.xScale(fire.Acres))
       .attr('height', this.yScale.bandwidth());
@@ -105,7 +105,9 @@ export class BarChartComponent implements OnInit, OnChanges {
   }
 
   private drawAxes() {
-    this.xAxis = d3.axisBottom(this.xScale);
+    this.xAxis = d3.axisBottom(this.xScale)
+      .ticks(5)
+      .tickFormat(d3.format('.0s'));
     this.yAxis = d3.axisLeft(this.yScale);
 
     this.chart.append('g')
@@ -114,8 +116,7 @@ export class BarChartComponent implements OnInit, OnChanges {
       .attr('transform', `translate(0, ${this.height})`)
       .selectAll('text')
       .attr('dy', '1em')
-      .attr('transform', 'translate(12, 0) rotate(60)')
-      .style('text-anchor', 'start');
+      .style('text-anchor', 'middle');
 
     this.chart.append('g')
       .call(this.yAxis)
@@ -125,15 +126,15 @@ export class BarChartComponent implements OnInit, OnChanges {
   }
 
   private updateAxes() {
-    this.xAxis = d3.axisBottom(this.xScale);
-    this.yAxis = d3.axisLeft(this.yScale);
+    this.xAxis.scale(this.xScale);
+    this.yAxis.scale(this.yScale);
 
     this.chart.select('.axis-x')
-      .transition().delay(500)
+      .transition().delay(250)
       .call(this.xAxis);
 
     this.chart.select('.axis-y')
-      .transition().delay(500)
+      .transition().delay(250)
       .call(this.yAxis);
   }
 

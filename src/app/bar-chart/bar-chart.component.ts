@@ -42,6 +42,11 @@ export class BarChartComponent implements OnInit, OnChanges {
     }
   }
 
+  onResize() {
+    this.setChartProperties();
+    this.drawOnResize();
+  }
+
   private setChartProperties() {
     const canvasWidth = parseInt(this.svg.style('width'), 0);
     const canvasHeight = parseInt(this.svg.style('height'), 0);
@@ -136,6 +141,24 @@ export class BarChartComponent implements OnInit, OnChanges {
     this.chart.select('.axis-y')
       .transition().delay(250)
       .call(this.yAxis);
+  }
+
+  private drawOnResize() {
+    this.xScale.range([0, this.width]);
+    this.yScale.range([0, this.height]);
+
+    this.chart.select('.axis-x')
+      .call(this.xAxis)
+      .attr('transform', `translate(0, ${this.height})`);
+
+    this.chart.select('.axis-y')
+      .call(this.yAxis);
+
+    this.chart.selectAll('.bar')
+      .attr('x', 0)
+      .attr('y', fire => this.yScale(fire.Name))
+      .attr('width', fire => this.xScale(fire.Acres))
+      .attr('height', this.yScale.bandwidth());
   }
 
 }

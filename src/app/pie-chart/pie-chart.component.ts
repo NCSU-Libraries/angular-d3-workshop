@@ -21,6 +21,7 @@ export class PieChartComponent implements OnInit, OnChanges {
   private piePieces: any;
   private radius: number;
   private margin: { top: number, right: number, bottom: number, left: number };
+
   constructor() { }
 
   ngOnInit() {
@@ -32,8 +33,16 @@ export class PieChartComponent implements OnInit, OnChanges {
 
   ngOnChanges() {
     if (this.piePieces) {
+      this.pieData.forEach(d =>
+        d.key === this.deleteFire.Cause ? d.value-- : d.value
+      );
       this.updatePie();
     }
+  }
+
+  onResize() {
+    this.setChartProperties();
+    this.updatePie();
   }
 
   private setChartProperties() {
@@ -43,7 +52,6 @@ export class PieChartComponent implements OnInit, OnChanges {
     this.radius = Math.min(canvasWidth, canvasHeight) * 0.75 / 2;
 
     this.chart
-      .attr('fill', '#333')
       .attr('transform', `translate( ${canvasWidth / 2}, ${canvasHeight / 2})`);
 
   }
@@ -72,11 +80,6 @@ export class PieChartComponent implements OnInit, OnChanges {
   }
 
   private updatePie() {
-    this.pieData.forEach(d =>
-      d.key === this.deleteFire.Cause ? d.value-- : d.value
-    );
-
-    // this.chart.datum(this.pieData);
 
     const arc = d3.arc().outerRadius(this.radius).innerRadius(0);
     this.piePieces = this.piePieces.data(this.pie);

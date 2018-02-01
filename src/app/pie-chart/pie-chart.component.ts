@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input, ViewEncapsulation } from '@angular/core';
 
-import { Fire } from '../data.interface';
+import { Fire } from '../fire-data.interface';
 import * as d3 from 'd3';
 
 

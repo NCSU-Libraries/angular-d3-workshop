@@ -1,6 +1,6 @@
 import { Component, OnInit, OnChanges, Input, ViewEncapsulation } from '@angular/core';
 
-import { Fire } from '../data.interface';
+import { Fire } from '../fire-data.interface';
 import * as d3 from 'd3';
 
 @Component({
@@ -90,8 +90,8 @@ export class BarChartComponent implements OnInit, OnChanges {
       .attr('class', 'bar')
       .attr('fill', fire => color(fire.Cause))
       .attr('x', 0)
-      .attr('y', fire => this.yScale(fire.Name))
       .attr('width', fire => this.xScale(fire.Acres))
+      .attr('y', fire => this.yScale(fire.Name))
       .attr('height', this.yScale.bandwidth());
 
     // Update - Modify current bars on chart

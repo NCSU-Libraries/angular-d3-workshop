@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { FireDataService } from '../fire-data.service';
-import { Fire } from '../data.interface';
+import { Fire } from '../fire-data.interface';
 
 @Component({
   selector: 'app-table',
@@ -9,7 +9,7 @@ import { Fire } from '../data.interface';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-  private fires: Fire[];
+  public fires: Fire[];
   private deleteFire: Fire;
   constructor(private fireDataService: FireDataService) { }
 

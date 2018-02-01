@@ -9,16 +9,19 @@ import { Fire } from '../fire-data.interface';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
+  //This is where we introduce data interface
   public fires: Fire[];
+>>>>>>> 3f4c9f1586bdab9790988529c71c20abc0aa688b
   private deleteFire: Fire;
   constructor(private fireDataService: FireDataService) { }
-
+  //Lifecycle Hooks - after first ngOnChanges
   ngOnInit() {
      this.getFireData();
   }
 
   getFireData(): void {
     this.fireDataService.getData()
+    //Subscribe is the other half of the observable. Observable is newspaper, subscribe is what gets it. It is also only delivered at the newspapers set delivery cycle
       .subscribe(fires => this.fires = fires);
   }
 

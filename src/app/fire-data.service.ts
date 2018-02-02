@@ -13,13 +13,14 @@ export class FireDataService {
   private fireDataUrl = 'api/fires'; // URL to in-memory fires data
 
   constructor(private http: HttpClient) { }
-  // Observable: an array of data that can change
+  //NOTE: An observable is an array of data that can change.
   getData(): Observable<Fire[]> {
     return this.http.get<Fire[]>(this.fireDataUrl);
   }
-  // If we were retrieving data from a 'live' API that we wanted to update - we would have an update function here
 
-  // CRUD - like delete
+  //NOTE: This is the area of the application that we could put an update function (if we were using a 'live')
+
+  //NOTE: This is another CRUD function, this allows the applciation to delete the selected line from the table when the 'remove' button is clicked.
   deleteFire(fire: Fire): Observable<Fire> {
     return this.http.delete<Fire>(`${this.fireDataUrl}/${fire.id}`, httpOptions);
   }

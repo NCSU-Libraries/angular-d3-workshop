@@ -13,12 +13,13 @@ import * as d3 from 'd3';
 export class PieChartComponent implements OnInit, OnChanges {
   @Input() private fires: Fire[];
   @Input() private deleteFire: Fire;
-  private pieData: Array<{key, value}>;
+  private pieData: {key: string, value: number}[];
   private color: d3.ScaleOrdinal<string, string>;
-  private svg: d3.Selection<SVGElement, any, any, any>;
+  private svg: d3.Selection<SVGElement, null, HTMLElement, any>;
   private chart: any;
-  private pie: any;
+  private pie: d3.Pie<SVGElement, {key: string, value: number}>;
   private piePieces: any;
+  private pieText: any;
   private radius: number;
   private margin: { top: number, right: number, bottom: number, left: number };
 
@@ -65,32 +66,61 @@ export class PieChartComponent implements OnInit, OnChanges {
       .rollup(v => v.length)
       .entries(this.fires);
 
-    this.pie = d3.pie<any>()
+    this.pie = d3.pie<{key: string, value: number}>()
       .sort(null)
       .value(d => d.value);
 
     const arc = d3.arc().outerRadius(this.radius).innerRadius(0);
+    const arcText = d3.arc().outerRadius(this.radius * 2.05).innerRadius(0);
 
-    this.piePieces = this.chart.datum(this.pieData).selectAll('path')
+    this.chart
+      .datum(this.pieData);
+
+    this.piePieces = this.chart.selectAll('path')
       .data(this.pie)
       .enter().append('path')
         .attr('d', arc)
         .attr('fill', d => this.color(d.data.key))
         .each(function(d) { this._current = d; });
+
+    this.pieText = this.chart.selectAll('text')
+      .data(this.pie)
+      .enter().append('text')
+        .text(d => d.data.key)
+        .attr('transform', d => `translate(${arcText.centroid(d)})`)
+        .attr('text-anchor', d =>
+            Math.sin((d.endAngle + d.startAngle) / 2) > 0 ? 'start' : 'end'
+        )
+        .attr('dominant-baseline', d =>
+            Math.cos((d.endAngle + d.startAngle) / 2) > 0 ? 'initial' : 'hanging'
+        );
   }
 
   private updatePie() {
-
     const arc = d3.arc().outerRadius(this.radius).innerRadius(0);
-    this.piePieces = this.piePieces.data(this.pie);
+    const arcText = d3.arc().outerRadius(this.radius * 2.05).innerRadius(0);
+    this.piePieces.data(this.pie);
+    this.chart.selectAll('text').data(this.pie);
+
     this.piePieces
       .transition().duration(750).attrTween('d', arcTween);
 
+    this.pieText
+      .text(d => d.value === 0 ? '' : d.data.key)
+      .transition().duration(750)
+      .attr('transform', d =>  `translate(${arcText.centroid(d)})`)
+      .attr('text-anchor', d =>
+          Math.sin((d.endAngle + d.startAngle) / 2) > 0 ? 'start' : 'end'
+      )
+      .attr('dominant-baseline', d =>
+          Math.cos((d.endAngle + d.startAngle) / 2) > 0 ? 'initial' : 'hanging'
+      );
+
     function arcTween(a) {
-      const i = d3.interpolate(this._current, a);
-      this._current = i(0);
+      const interpolation = d3.interpolate(this._current, a);
+      this._current = interpolation(0);
       return function(t) {
-        return arc(i(t));
+        return arc(interpolation(t));
       };
     }
   }

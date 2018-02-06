@@ -3,16 +3,10 @@ body {
   margin: 0;
 }
 .half-view-height {
-  height: 50vh;
+  height: 60vh;
+  min-height: 375px
 }
 
-.vertical-scroll {
-  overflow-y: scroll;
-}
-
-.table-graph-container {
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+.show-content-overflow {
+  overflow: visible !important;
 }

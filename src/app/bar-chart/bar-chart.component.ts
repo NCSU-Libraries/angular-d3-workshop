@@ -1,7 +1,7 @@
 import { Component, OnInit, OnChanges, Input, ViewEncapsulation } from '@angular/core';
 
-import { Fire } from '../fire-data.interface';
-import * as d3 from 'd3';
+import { Fire } from '../fire-data.interface'; // Import the fire object type format
+import * as d3 from 'd3'; // Import the d3 library
 
 @Component({
   selector: 'app-bar-chart',
@@ -11,14 +11,14 @@ import * as d3 from 'd3';
 })
 export class BarChartComponent implements OnInit, OnChanges {
   @Input() private fires: Fire[];
-  private svg: d3.Selection<SVGElement, any, any, any>;
-  private chart: any;
-  private bars: d3.Selection<any, Fire, any, any>;
+  private svg: d3.Selection<SVGElement, any, any, any>; // d3 selection of svg element
+  private chart: any; // d3 selection of svg group, 'g', element
+  private bars: d3.Selection<any, Fire, any, any>; // d3 selection of svg 'rect' element
   private width: number;
   private height: number;
   private margin: { top: number, right: number, bottom: number, left: number };
-  private xScale: d3.ScaleLinear<number, number>;
-  private yScale: d3.ScaleBand<string>;
+  private xScale: d3.ScaleLinear<number, number>; // d3 linear scale function
+  private yScale: d3.ScaleBand<string>; // d3 band scale function
   private xAxis: any;
   private yAxis: any;
 
@@ -61,7 +61,7 @@ export class BarChartComponent implements OnInit, OnChanges {
     this.height = canvasHeight - this.margin.top - this.margin.bottom;
 
     this.chart
-      .attr('transform', `translate( ${this.margin.left}, ${this.margin.top})`);
+      .attr('transform', `translate(${this.margin.left}, ${this.margin.top})`);
   }
 
   private setScales() {
@@ -80,8 +80,8 @@ export class BarChartComponent implements OnInit, OnChanges {
       .domain(this.fires.map(fire => fire.Cause));
 
     this.bars = this.chart
-      .selectAll('.bar')
-      .data(this.fires, fire => fire.id); // https://bost.ocks.org/mike/constancy/
+       .selectAll('.bar')
+       .data(this.fires, fire => fire.id); // https://bost.ocks.org/mike/constancy/
 
     // Enter - Add bars to chart
     this.bars
@@ -90,8 +90,8 @@ export class BarChartComponent implements OnInit, OnChanges {
       .attr('class', 'bar')
       .attr('fill', fire => color(fire.Cause))
       .attr('x', 0)
-      .attr('width', fire => this.xScale(fire.Acres))
       .attr('y', fire => this.yScale(fire.Name))
+      .attr('width', fire => this.xScale(fire.Acres))
       .attr('height', this.yScale.bandwidth());
 
     // Update - Modify current bars on chart
@@ -111,23 +111,24 @@ export class BarChartComponent implements OnInit, OnChanges {
 
   private drawAxes() {
     this.xAxis = d3.axisBottom(this.xScale)
-      .ticks(5)
-      .tickFormat(d3.format('.0s'));
+      .ticks(5);
     this.yAxis = d3.axisLeft(this.yScale);
 
     this.chart.append('g')
       .call(this.xAxis)
       .attr('class', 'axis axis-x')
       .attr('transform', `translate(0, ${this.height})`)
-      .selectAll('text')
-      .attr('dy', '1em')
-      .style('text-anchor', 'middle');
+      .append('text')
+        .text('Acres')
+        .attr('class', 'axis-x-title')
+        .attr('transform', `translate(${this.width}, 0)`)
+        .attr('fill', `black`)
+        .attr('dominant-baseline', `ideographic`)
+        .attr('text-anchor', `end`);
 
     this.chart.append('g')
       .call(this.yAxis)
-      .attr('class', 'axis axis-y')
-      .attr('dy', '0.31em')
-      .attr('text-anchor', 'end');
+      .attr('class', 'axis axis-y');
   }
 
   private updateAxes() {
@@ -149,7 +150,9 @@ export class BarChartComponent implements OnInit, OnChanges {
 
     this.chart.select('.axis-x')
       .call(this.xAxis)
-      .attr('transform', `translate(0, ${this.height})`);
+      .attr('transform', `translate(0, ${this.height})`)
+      .select('.axis-x-title')
+        .attr('transform', `translate(${this.width}, 0)`);
 
     this.chart.select('.axis-y')
       .call(this.yAxis);

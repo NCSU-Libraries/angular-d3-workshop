@@ -11,7 +11,9 @@ import { Fire } from '../fire-data.interface';
 export class TableComponent implements OnInit {
   // This is where we introduce data interface
   public fires: Fire[];
+
   private deleteFire: Fire;
+
   constructor(private fireDataService: FireDataService) { }
   // Lifecycle Hooks - after first ngOnChanges
   ngOnInit() {

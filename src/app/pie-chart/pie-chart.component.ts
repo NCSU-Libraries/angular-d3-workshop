@@ -50,7 +50,7 @@ export class PieChartComponent implements OnInit, OnChanges {
     const canvasWidth = parseInt(this.svg.style('width'), 0);
     const canvasHeight = parseInt(this.svg.style('height'), 0);
 
-    this.radius = Math.min(canvasWidth, canvasHeight) * 0.75 / 2;
+    this.radius = Math.min(canvasWidth, canvasHeight) * 0.6 / 2;
 
     this.chart
       .attr('transform', `translate( ${canvasWidth / 2}, ${canvasHeight / 2})`);

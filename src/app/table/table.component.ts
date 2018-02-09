@@ -9,13 +9,13 @@ import { Fire } from '../fire-data.interface';
   styleUrls: ['./table.component.css']
 })
 export class TableComponent implements OnInit {
-  // This is where we introduce data interface
+  // Setting the property of fires to the import of Fire[] from the fire-data.interface.
   public fires: Fire[];
 
   private deleteFire: Fire;
 
   constructor(private fireDataService: FireDataService) { }
-  // Lifecycle Hooks - after first ngOnChanges
+  // ngOnInit is called right after the directive's data-bound properties have been checked for the first time, and before any of its children have been checked. It is invoked only once when the directive is instantiated.
   ngOnInit() {
      this.getFireData();
   }

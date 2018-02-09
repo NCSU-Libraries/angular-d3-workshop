@@ -8,23 +8,31 @@
     <div class="col col-12 col-lg-8">
       <table class="table table-sm table-striped">
         <thead class="thead">
-          <th>Name</th>
+          <!-- <th>Name</th>
           <th>County</th>
           <th>Acres</th>
           <th>Cause</th>
-          <th></th>
+          <th></th> -->
         </thead>
         <tbody>
-          <tr *ngFor="let fire of fires">
-            <!--interpolation go here - they correspond to the keys in teh in-emory-data-service.ts file-->
-            <td>{{fire.Name}}</td>
+          <!-- NOTE-1: *NgFor - The NgForOf directive instantiates a template once per item from an iterable. The context for each instantiated template inherits from the outer context with the given loop variable set to the current item from the iterable. via https://angular.io/api/common/NgForOf#selectors-->
+
+          <!-- <tr *ngFor="let fire of fires"> -->
+
+           <!-- NOTE-2: Interpolation - You use interpolation to weave calculated strings into the text between HTML element tags and within attribute assignments. via https://angular.io/guide/template-syntax#interpolation-->
+
+            <!-- <td>{{fire.Name}}</td>
             <td>{{fire.County}}</td>
             <td>{{fire.Acres}}</td>
-            <td>{{fire.Cause}}</td>
-            <td>
-              <!--This calls to the table.component.ts delete function, which calls to the fire-data.service.ts deleteFire function, which deletes it from the backend. add a console.log to show this  -->
+            <td>{{fire.Cause}}</td> -->
+
+            <!-- NOTE-3: Template Statements - A template statement responds to an event raised by a binding target such as an element, component, or directive. You'll see template statements in the event binding section, appearing in quotes to the right of the = symbol as in (event)="statement" via https://angular.io/guide/template-syntax#template-statements-->
+
+            <!-- <td>
              <button (click)="delete(fire)" type="button" class="btn btn-danger btn-sm">Remove</button>
-           </td>
+           </td> -->
+
+
           </tr>
         </tbody>
       </table>

@@ -4,6 +4,16 @@ export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const fires = [
       {
+        'id': 0,
+        'Name': 'THOMAS',
+        'Cause': 'Under Investigation',
+        'Date': ' December 2017',
+        'County': 'Ventura & Santa Barbara',
+        'Acres': 281893,
+        'Structures': 1063,
+        'Deaths': 1
+      },
+      {
         'id': 1,
         'Name': 'CEDAR',
         'Cause': 'Human Related',
@@ -191,16 +201,6 @@ export class InMemoryDataService implements InMemoryDbService {
         'County': 'Tehama',
         'Acres': 125892,
         'Structures': 27,
-        'Deaths': 0
-      },
-      {
-        'id': 20,
-        'Name': 'WHEELER',
-        'Cause': 'Arson',
-        'Date': 'July 1985',
-        'County': 'Ventura',
-        'Acres': 118000,
-        'Structures': 26,
         'Deaths': 0
       }
     ];

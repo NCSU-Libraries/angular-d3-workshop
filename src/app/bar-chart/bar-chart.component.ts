@@ -86,51 +86,14 @@ export class BarChartComponent implements OnInit, OnChanges {
     //   .padding(0.1);
   }
 
-  // TODO-4: Draw the visual representation of our data as bars with relative length representing Acres and color representing Cause
-  private drawBars() {
-    // TODO-4.1: Create an ordinal scale with a domain to map fire Cause to unique colors
-    // const color = d3.scaleOrdinal(d3.schemeCategory10)
-    //   .domain(this.firesBars.map(fire => fire.Cause));
-
-    // TODO-4.2: Join fire data to the '.bar' elements using a key function
-    // this.bars = this.chart
-    //    .selectAll('.bar')
-    //    .data(this.firesBars, fire => fire.id); // https://bost.ocks.org/mike/constancy/
-
-    // TODO-4.3: Enter - Add bars to chart
-    // this.bars
-    //   .enter()
-    //   .append('rect')
-    //   .attr('class', 'bar')
-    //   .attr('fill', fire => color(fire.Cause))
-    //   .attr('x', 0)
-    //   .attr('y', fire => this.yScale(fire.Name))
-    //   .attr('width', fire => this.xScale(fire.Acres))
-    //   .attr('height', this.yScale.bandwidth());
-
-    // TODO 6: Update - Modify current bars on chart
-    // this.bars
-    //   .transition().delay(250)
-    //   .attr('y', fire => this.yScale(fire.Name))
-    //   .attr('width', fire => this.xScale(fire.Acres))
-    //   .attr('height', this.yScale.bandwidth());
-
-    // TODO 7: Exit - Remove bars from chart
-    // this.bars
-    //   .exit()
-    //   .transition()
-    //   .attr('width', 0)
-    //   .remove();
-  }
-
-  // TODO-5: Draw the chart axes
+  // TODO-4: Draw the chart axes
   private drawAxes() {
-    // TODO-5.1: Initialize the x and y axis properties with appropriate d3.axis methods
+    // TODO-4.1: Initialize the x and y axis properties with appropriate d3.axis methods
     // this.xAxis = d3.axisBottom(this.xScale)
     //   .ticks(5);
     // this.yAxis = d3.axisLeft(this.yScale);
 
-    // TODO-5.2: Draw the x axis
+    // TODO-4.2: Draw the x axis
     // this.chart.append('g')
     //   .call(this.xAxis)
     //   .attr('class', 'axis-x')
@@ -143,10 +106,47 @@ export class BarChartComponent implements OnInit, OnChanges {
     //     .attr('dominant-baseline', `ideographic`)
     //     .attr('text-anchor', `end`);
 
-    // TODO-5.3: Draw the y axis
+    // TODO-4.3: Draw the y axis
     // this.chart.append('g')
     //   .call(this.yAxis)
     //   .attr('class', 'axis-y');
+  }
+
+  // TODO-5: Draw the visual representation of our data as bars with relative length representing Acres and color representing Cause
+  private drawBars() {
+    // TODO-5.1: Create an ordinal scale with a domain to map fire Cause to unique colors
+    // const color = d3.scaleOrdinal(d3.schemeCategory10)
+    //   .domain(this.firesBars.map(fire => fire.Cause));
+
+    // TODO-5.2: Join fire data to the '.bar' elements using a key function
+    // this.bars = this.chart
+    //    .selectAll('.bar')
+    //    .data(this.firesBars, fire => fire.id); // https://bost.ocks.org/mike/constancy/
+
+    // TODO-5.3: Enter - Add bars to chart
+    // this.bars
+    //   .enter()
+    //   .append('rect')
+    //   .attr('class', 'bar')
+    //   .attr('fill', fire => color(fire.Cause))
+    //   .attr('x', 0)
+    //   .attr('y', fire => this.yScale(fire.Name))
+    //   .attr('width', fire => this.xScale(fire.Acres))
+    //   .attr('height', this.yScale.bandwidth());
+
+    // TODO-5.4: Update - Modify current bars on chart
+    // this.bars
+    //   .transition().delay(250)
+    //   .attr('y', fire => this.yScale(fire.Name))
+    //   .attr('width', fire => this.xScale(fire.Acres))
+    //   .attr('height', this.yScale.bandwidth());
+
+    // TODO-5.5: Exit - Remove bars from chart
+    // this.bars
+    //   .exit()
+    //   .transition()
+    //   .attr('width', 0)
+    //   .remove();
   }
 
   private updateAxes() {

@@ -80,6 +80,7 @@ export class BarChartComponent implements OnInit, OnChanges {
     // TODO-3.2: Create a linear scale for our x data (Acres) with the appropriate domain and range
     // this.xScale = d3.scaleLinear()
     //   .domain(xDomain).range([0, this.width]);
+
     // TODO-3.3: Create a band scale for our y data (Name) with the appropriate domain and range (https://github.com/d3/d3-scale#band-scales)
     // this.yScale = d3.scaleBand()
     //   .domain(yDomain).range([0, this.height])

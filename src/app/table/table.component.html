@@ -1,7 +1,8 @@
 <div class="container-fluid">
   <div class="row justify-content-center">
     <!-- NOTE: *ngIf ensures data has loaded before initializing charts. The fires data provided to table.componente.ts is bound to its children with input binding - e.g., [firesBars]="fires" -->
-    <app-bar-chart class="col-12 col-md-6" *ngIf="fires" [firesBars]="fires"></app-bar-chart>
+    
+    <!-- <app-bar-chart class="col-12 col-md-6" *ngIf="fires" [firesBars]="fires"></app-bar-chart> -->
 
     <app-pie-chart class="col-12 col-md-6" *ngIf="fires" [fires]="fires" [deleteFire]="deleteFire"></app-pie-chart>
 

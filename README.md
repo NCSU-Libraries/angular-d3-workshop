@@ -2,6 +2,8 @@
 
 This workshop was developed to help walk you through the creation of a data dashboard using Angular and D3.js. While it is not a step-by-step tutorial we have added extensive comments to the code. We have tried to highlight the most important steps in the process on this site. Most of the work you will be doing is uncommenting sections of code, in a sequential manner, to get a sense of how each component of the application works.
 
+A complete, working example is available for demo here: https://waltgurley.github.io/fires-dashboard-final-build/
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.6.4.
 
 ## Development server
